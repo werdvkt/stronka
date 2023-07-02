@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>lkmsky.</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url("https://i.imgur.com/0fy8MBU.jpeg");
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    .header {
+      font-size: 59.5px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 13px;
+    }
+    .icon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .icon {
+      margin: 10px;
+      font-size: 28px;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+      position: relative;
+    }
+    .icon:hover {
+      transform: translateY(-10px);
+    }
+    .icon::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #ffffffaf;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .icon:hover::after {
+      opacity: 1;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      var typed = new Typed('#typing-element', {
+        strings: ["Cześć tu lkmsky."],
+        typeSpeed: 60,
+        showCursor: false,
+        onComplete: function() {
+        
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="header">
+    <span id="typing-element"></span>
+  </div>
+  <div class="icon-container">
+    <a href="sprzet.html" target="_blank" class="icon" data-tooltip="Sprzęt (ale nie klikaj w to jeszcze)">
+      <i class="fas fa-desktop"></i>
+    </a>
+    <a href="https://github.com/lkmsky" target="_blank" class="icon" data-tooltip="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://tiktok.com/@lkmsky" target="_blank" class="icon" data-tooltip="TikTok">
+      <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="https://pinterest.com/lkmsky" target="_blank" class="icon" data-tooltip="Pinterest">
+      <i class="fab fa-pinterest"></i>
+    </a>
+    <a href="mailto:lkmsky@linux.pl" class="icon" data-tooltip="E-mail">
+      <i class="far fa-envelope"></i>
+    </a>
+    <a href="https://twitter.com/pettownik" target="_blank" class="icon" data-tooltip="Twitter">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="https://www.youtube.com/@lkmsky" target="_blank" class="icon" data-tooltip="YouTube">
+      <i class="fab fa-youtube"></i>
+    </a>
+    <a href="https://discordapp.com/users/1102990589294817360" target="_blank" class="icon" data-tooltip="Discord">
+      <i class="fab fa-discord"></i>
+    </a>
+    <a href="https://instagram.com" target="_blank" class="icon" data-tooltip="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://soundcloud.com/lkmsky" target="_blank" class="icon" data-tooltip="SoundCloud">
+      <i class="fab fa-soundcloud"></i>
+    </a>
+    <a href="https://sptfy.com/lkmsky" target="_blank" class="icon" data-tooltip="Spotify">
+      <i class="fab fa-spotify"></i>
+    </a>
+  </div>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</body>
+</html>
